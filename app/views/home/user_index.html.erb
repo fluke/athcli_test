@@ -1,0 +1,13 @@
+<h1 class="text-danger"> <%= current_user.email %>'s profile</h1>
+
+
+<%=link_to "New Request", new_request_path, class: "btn btn-success" %>
+
+<ul class="nav nav-pills nav-stacked">
+<h2>Your Requests</h2>
+<% @requests.each do |request| %>
+<li>
+<%= link_to request.title, request_path(request) %>
+</li>
+<%end%>
+</ul>

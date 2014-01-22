@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @request.title %>
+</p>
+
+<p>
+  <strong>Movie url:</strong>
+  <%= @request.movie_url %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @request.user_id %>
+</p>
+
+<p>
+  <strong>Coach:</strong>
+  <%= @request.coach_id %>
+</p>
+
+
+<%if user_signed_in? && @request.user == current_user %> 
+<%= link_to 'Edit', edit_request_path(@request) %> 
+<%end%>

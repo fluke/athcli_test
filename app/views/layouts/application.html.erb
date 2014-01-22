@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Athcli2</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+ <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">Athcli</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><% if user_signed_in? %>
+<%= link_to "Logged in as #{current_user.email}. Logout", destroy_user_session_path, method: :delete %>
+<% end%>
+</li>
+            <li>
+            	<% if coach_signed_in? %>
+<%= link_to "Logged in as #{current_coach.email}. Logout", destroy_coach_session_path, method: :delete %>
+<% end%>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<div class="clearfix"></div>
+<div class="container">
+<% if notice %>
+<div class="alert alert-info"><%= notice %></div>
+<%end%>
+
+
+<%= yield %>
+</div>
+</body>
+</html>

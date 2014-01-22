@@ -1,0 +1,12 @@
+<div class="text-danger">
+<h1> <%= current_coach.email %>'s profile</h1>
+</div>
+
+<h3>Your Requests</h3>
+<ul class="nav nav-pills nav-stacked">
+<% @requests.each do |request| %>
+<li>
+<%= link_to request.title, request_path(request) %>
+</li>
+<%end%>
+</ul>
