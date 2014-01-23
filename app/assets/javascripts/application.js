@@ -85,11 +85,10 @@ ATHCLI = {
           preserveCanvasContents: true,
           onInit: function(lc) {
 
-            $('[data-action=upload-to-imgur]').click(function(e) {
+            $('#imgur').unbind("click").click(function(e) {
               e.preventDefault();
 
               // Open modal
-
               $('#request_modal').modal({backdrop: 'static'});
 
               // Get the imgur id set using in the erb template
@@ -114,7 +113,7 @@ ATHCLI = {
                 success: function(result) {
                   // VARUN:
                   // On successful upload - scene_url is set
-                  $('#scene_url').val('https://imgur.com/gallery/' + result.data.id);
+                  $('.scene_url').val('https://imgur.com/gallery/' + result.data.id);
 
                   // Image is cleared
                   $('.clear-button').click();
@@ -157,6 +156,6 @@ UTIL = {
   }
 };
  
-$(document).ready(UTIL.init);
-$(document).ajaxComplete(UTIL.init);
-$(window).bind('page:change', UTIL.init);
+// page:change includes document.ready()   
+// page:update is triggered whenever page:change is PLUS on jQuery's ajaxSucess
+$(window).bind('page:update', UTIL.init);

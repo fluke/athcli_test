@@ -4,7 +4,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <p>Uploading the scene.</p>
+        <h4>Uploading the scene.</h4>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -18,37 +18,35 @@
     	<source src="<%= image_path("video.mp4") %>" type="video/mp4"> 
     </video> 
     <button id="snap" class="btn btn-success">Take screenshot</button>
-    <form id="<%= IMGUR_CLIENT_ID %>" class="imgur-submit">
-        <input type="submit" class="btn btn-submit" data-action="upload-to-imgur" value="Upload to Imgur">
-        <input id="scene_url" type="hidden">
-    </form>
   </div>
   <div class="col-md-6">
     <div id="l" class="literally">
     	<canvas id="b"></canvas>
     	<canvas id="c"></canvas>
     </div>
+    <form id="<%= IMGUR_CLIENT_ID %>" class="imgur-submit">
+        <input type="submit" class="btn btn-submit" id="imgur" value="Save Scene">
+        <input class="scene_url" type="hidden">
+    </form>
   </div>
 </div>
+
+
 <p>
   <strong>Title:</strong>
   <%= @request.title %>
-</p>
 
-<p>
   <strong>Movie url:</strong>
   <%= @request.movie_url %>
-</p>
 
-<p>
   <strong>User:</strong>
   <%= @request.user_id %>
-</p>
 
-<p>
   <strong>Coach:</strong>
   <%= @request.coach_id %>
 </p>
+
+<input class="scene_url form-control" type="text">
 
 
 <%if user_signed_in? && @request.user == current_user %> 
