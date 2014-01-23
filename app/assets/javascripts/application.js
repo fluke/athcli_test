@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require_directory ./core
 //= require litjquery
+//= require modal
 
 ATHCLI = {
   common: {
@@ -86,10 +87,16 @@ ATHCLI = {
 
             $('[data-action=upload-to-imgur]').click(function(e) {
               e.preventDefault();
+
+              // Open modal
+
+              $('#request_modal').modal({backdrop: 'static'});
+
+              // Get the imgur id set using in the erb template
               var imgurClientId = $('.imgur-submit').attr('id');
+
+              // Combine LC and screenshot before upload
               context.drawImage(lc.canvasForDraw(),0,0,v.clientWidth,v.clientHeight);
-              // this is all bog standard Imgur API; only LC-specific thing is the
-              // image data argument
 
               $.ajax({
                 url: 'https://api.imgur.com/3/image',
@@ -100,11 +107,25 @@ ATHCLI = {
                   Accept: 'application/json'
                 },
                 data: {
+                  // Covert canvas image to base64
                   image:  canvas.toDataURL().split(',')[1],
                   type: 'base64'
                 },
                 success: function(result) {
+                  // VARUN:
+                  // On successful upload - scene_url is set
                   $('#scene_url').val('https://imgur.com/gallery/' + result.data.id);
+
+                  // Image is cleared
+                  $('.clear-button').click();
+                  snapclick(v,context,backcontext,cw,ch);
+
+                  // Ajax submit scene form <--- here
+
+                  // End of successful response
+                  // Close the modal
+                  $('#request_modal').modal('hide');
+                  
                 },
               });
             })
