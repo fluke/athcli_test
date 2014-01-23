@@ -1,0 +1,23 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.literally {
+	height: 421px;
+	width: 480px;
+	cursor: crosshair;
+}
+
+.literally {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -180px 0 0 20px;
+}
+ 
+#v {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -180px 0 0 -500px;
+}
