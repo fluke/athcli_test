@@ -1,5 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+<video id="v" controls="" loop=""> 
+	<source src="<%= image_path("video.webm") %>" type="video/webm"> 
+	<source src="<%= image_path("video.ogg") %>" type="video/ogg"> 
+	<source src="<%= image_path("video.mp4") %>" type="video/mp4"> 
+</video> 
+<div id="l" class="literally">
+	<canvas id="b"></canvas>
+	<canvas id="c"></canvas>
+</div>
+<form id="<%= IMGUR_CLIENT_ID %>" class="imgur-submit">
+    <input type="submit" data-action="upload-to-imgur" value="Upload to Imgur">
+</form>
+<button id="snap">Take screenshot</button>
+
 <p>
   <strong>Title:</strong>
   <%= @request.title %>
