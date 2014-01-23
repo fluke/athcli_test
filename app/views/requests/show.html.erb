@@ -1,19 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<video id="v" controls="" loop=""> 
-	<source src="<%= image_path("video.webm") %>" type="video/webm"> 
-	<source src="<%= image_path("video.ogg") %>" type="video/ogg"> 
-	<source src="<%= image_path("video.mp4") %>" type="video/mp4"> 
-</video> 
-<div id="l" class="literally">
-	<canvas id="b"></canvas>
-	<canvas id="c"></canvas>
+<div class="row">
+  <div class="col-md-6">
+    <video id="v" controls="" loop=""> 
+    	<source src="<%= image_path("video.webm") %>" type="video/webm"> 
+    	<source src="<%= image_path("video.ogg") %>" type="video/ogg"> 
+    	<source src="<%= image_path("video.mp4") %>" type="video/mp4"> 
+    </video> 
+    <button id="snap" class="btn btn-success">Take screenshot</button>
+    <form id="<%= IMGUR_CLIENT_ID %>" class="imgur-submit">
+        <input type="submit" class="btn btn-submit" data-action="upload-to-imgur" value="Upload to Imgur">
+        <input id="scene_url" type="hidden">
+    </form>
+  </div>
+  <div class="col-md-6">
+    <div id="l" class="literally">
+    	<canvas id="b"></canvas>
+    	<canvas id="c"></canvas>
+    </div>
+  </div>
 </div>
-<form id="<%= IMGUR_CLIENT_ID %>" class="imgur-submit">
-    <input type="submit" data-action="upload-to-imgur" value="Upload to Imgur">
-</form>
-<button id="snap">Take screenshot</button>
-
 <p>
   <strong>Title:</strong>
   <%= @request.title %>

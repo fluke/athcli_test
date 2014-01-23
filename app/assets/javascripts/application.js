@@ -41,7 +41,19 @@ ATHCLI = {
       
       var cw,ch;
 
-      
+      v.addEventListener('loadeddata', function() {
+         // Video is loaded and can be played
+         cw = v.clientWidth;
+         ch = v.clientHeight;
+         canvas.height = ch;
+         canvas.width = cw;
+         canvas2.height = ch;
+         canvas2.width = cw;
+         
+         back.width = cw;
+         back.height = ch;
+         l.css({ width: cw, height: ch+61 });
+      }, false);
 
       $('#snap').click(function() {
         cw = v.clientWidth;
@@ -74,7 +86,6 @@ ATHCLI = {
 
             $('[data-action=upload-to-imgur]').click(function(e) {
               e.preventDefault();
-              $('.imgur-submit').html('Uploading...');
               var imgurClientId = $('.imgur-submit').attr('id');
               context.drawImage(lc.canvasForDraw(),0,0,v.clientWidth,v.clientHeight);
               // this is all bog standard Imgur API; only LC-specific thing is the
@@ -93,7 +104,7 @@ ATHCLI = {
                   type: 'base64'
                 },
                 success: function(result) {
-                  window.location = 'https://imgur.com/gallery/' + result.data.id;
+                  $('#scene_url').val('https://imgur.com/gallery/' + result.data.id);
                 },
               });
             })
