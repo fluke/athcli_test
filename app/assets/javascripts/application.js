@@ -149,7 +149,8 @@ UTIL = {
     var body = document.body,
         controller = body.getAttribute( "data-controller" ),
         action = body.getAttribute( "data-action" );
- 
+    
+    console.log(controller+'#'+action+' executed');
     UTIL.exec( "common" );
     UTIL.exec( controller );
     UTIL.exec( controller, action );
