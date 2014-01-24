@@ -54,7 +54,7 @@ class LC.RectangleWidget extends LC.StrokeWidget
 
   title: 'Rectangle'
   cssSuffix: 'rectangle'
-  button: -> "<img src='#{@opts.imageURLPrefix}/rectangle.png'>"
+  button: -> "<img src='<%= image_path('rectangle.png') %>'>"
   makeTool: -> new LC.RectangleTool()
 
 
@@ -62,7 +62,7 @@ class LC.LineWidget extends LC.StrokeWidget
 
   title: 'Line'
   cssSuffix: 'line'
-  button: -> "<img src='#{@opts.imageURLPrefix}/line.png'>"
+  button: -> "<img src='<%= image_path('line.png') %>'>"
   makeTool: -> new LC.LineTool()
 
 
@@ -70,7 +70,7 @@ class LC.PencilWidget extends LC.StrokeWidget
 
   title: "Pencil"
   cssSuffix: "pencil"
-  button: -> "<img src='#{@opts.imageURLPrefix}/pencil.png'>"
+  button: -> "<img src='<%= image_path('pencil.png') %>'>"
   makeTool: -> new LC.Pencil()
 
 
@@ -78,7 +78,7 @@ class LC.EraserWidget extends LC.PencilWidget
 
   title: "Eraser"
   cssSuffix: "eraser"
-  button: -> "<img src='#{@opts.imageURLPrefix}/eraser.png'>"
+  button: -> "<img src='<%= image_path('eraser.png') %>'>"
   makeTool: -> new LC.Eraser()
 
 
@@ -86,7 +86,7 @@ class LC.PanWidget extends LC.ToolWidget
 
   title: "Pan"
   cssSuffix: "pan"
-  button: -> "<img src='#{@opts.imageURLPrefix}/pan.png'>"
+  button: -> "<img src='<%= image_path('pan.png') %>'>"
   makeTool: -> new LC.Pan()
 
 
@@ -94,7 +94,7 @@ class LC.EyeDropperWidget extends LC.ToolWidget
 
   title: "Eyedropper"
   cssSuffix: "eye-dropper"
-  button: -> "<img src='#{@opts.imageURLPrefix}/eyedropper.png'>"
+  button: -> "<img src='<%= image_path('eyedropper.png') %>'>"
   makeTool: -> new LC.EyeDropper()
 
 
@@ -117,7 +117,7 @@ class LC.TextWidget extends LC.ToolWidget
   constructor: (args...) ->
     super(args...)
 
-  button: -> "<img src='#{@opts.imageURLPrefix}/text.png'>"
+  button: -> "<img src='<%= image_path('text.png') %>'>"
   select: (lc) ->
     @updateTool()
     lc.setTool(@tool)

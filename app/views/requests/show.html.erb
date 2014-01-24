@@ -40,4 +40,6 @@
 
 <%if user_signed_in? && @request.user == current_user %> 
 <%= link_to 'Edit', edit_request_path(@request), class: "btn btn-warning" %> 
+
 <%end%>
+
