@@ -34,8 +34,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-<<<<<<< HEAD
-
 #gem 'simple_form'
 
 group :production do
