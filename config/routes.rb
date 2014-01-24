@@ -5,7 +5,7 @@ Athcli2::Application.routes.draw do
   get "home/user_index"
     root "home#index"
   resources :requests
-  
+  get 'requests/:id/scenes' => 'requests#scenes', as: :request_scenes
   devise_for :coaches
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
