@@ -5,12 +5,16 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all
   end
 
   # GET /requests/1
   # GET /requests/1.json
   def show
+  end
+
+
+  def ajax_save_scene
+    
   end
 
   # GET /requests/new
