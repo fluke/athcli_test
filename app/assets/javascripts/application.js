@@ -32,11 +32,14 @@ ATHCLI = {
     show: function() {
       // action-specific code
       var v = document.getElementById('v');
+      // Literally canvas object
       l = $('#l');
       var canvas = document.getElementById('c');
       var context = canvas.getContext('2d');
-      var canvas2 = document.getElementById('b');
-      var context2 = canvas.getContext('2d');
+      var lcanvas = document.getElementById('b');
+      // Drawing canvas object
+      b = $('#b');
+      var lcontext = canvas.getContext('2d');
       var back = document.createElement('canvas');
       var backcontext = back.getContext('2d');
       
@@ -48,9 +51,9 @@ ATHCLI = {
          ch = v.clientHeight;
          canvas.height = ch;
          canvas.width = cw;
-         canvas2.height = ch;
-         canvas2.width = cw;
-         
+         lcanvas.height = ch;
+         lcanvas.width = cw;
+         b.css({ width: cw, height: ch });
          back.width = cw;
          back.height = ch;
          l.css({ width: cw, height: ch+61 });
@@ -66,9 +69,9 @@ ATHCLI = {
         if(v.ended) return false;
         canvas.height = ch;
         canvas.width = cw;
-        canvas2.height = ch;
-        canvas2.width = cw;
-        
+        lcanvas.height = ch;
+        lcanvas.width = cw;
+        b.css({ width: cw, height: ch });
         back.width = cw;
         back.height = ch;
         l.css({ width: cw, height: ch+61 });
