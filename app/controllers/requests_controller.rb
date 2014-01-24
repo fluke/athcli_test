@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_request, only: [:show, :edit, :update, :destroy, :scenes]
   before_action :authenticate_user!, only: [:create, :new, :update, :destroy]
-  before_action :permission_ok, only: [:show, :update, :edit, :update, :destroy]
+  before_action :permission_ok, only: [:show, :update, :edit, :update, :destroy, :scenes]
   # GET /requests
   # GET /requests.json
   def index
@@ -14,8 +14,12 @@ class RequestsController < ApplicationController
 
 
   def ajax_save_scene
-    
+
   end
+
+def scenes
+  @scenes = @request.scenes
+end
 
   # GET /requests/new
   def new

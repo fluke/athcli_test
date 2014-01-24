@@ -1,0 +1,13 @@
+<h1>Scenes for <%= @request.title %> </h1>
+
+<% @scenes.each_with_index do |scene, i| %>
+
+Scene number #<%=i%>
+<%= image_tag(scene.image_url) %>
+    <%= simple_form_for :comments, { url: add_request_comment_path,:method => 'post', wrapper: :home } do |f| %>
+      <%= f.input :data, as: :text, placeholder: "Leave comment" %>
+      <%= f.button :submit, "Submit", class: "btn btn-success" %>
+    <% end %>
+<%end%>
+
+

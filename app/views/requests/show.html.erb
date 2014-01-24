@@ -14,8 +14,9 @@
 
 <div class="row">
   <div class="col-md-6">
-    <video id="v" controls="" loop=""> 
-    	<source src="<%= @request.movie_url %>" type="video/mp4"> 
+    <video width="520" crossorigin="anonymous" id="v" controls="" loop=""> 
+      <source src="<%=@request.movie_url%>" type="video/mp4">
+      <!--image_path("video.mp4")-->
     </video> 
     <button id="snap" class="btn btn-success">Take screenshot</button>
   </div>
@@ -40,4 +41,3 @@
 <%if user_signed_in? && @request.user == current_user %> 
 <%= link_to 'Edit', edit_request_path(@request), class: "btn btn-warning" %> 
 <%end%>
-<br/>
