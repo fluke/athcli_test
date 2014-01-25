@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy, :scenes]
+  before_action :set_request, only: [:show, :edit, :update, :destroy, :scenes, :add_request_comment]
   before_action :authenticate_user!, only: [:create, :new, :update, :destroy]
-  before_action :permission_ok, only: [:show, :update, :edit, :update, :destroy, :scenes]
+  before_action :permission_ok, only: [:show, :update, :edit, :update, :destroy, :scenes, :add_request_comment]
   # GET /requests
   # GET /requests.json
   def index
@@ -13,11 +13,36 @@ class RequestsController < ApplicationController
   end
 
 
-  def ajax_save_scene
-
+  def request_reload
+    authenticate_coach!
+    #check if user can access
+if Request.find(params[:request_id]) &&  Request.find(params[:request_id]).coach == current_coach
+@scene = Scene.create(:request_id => params[:request_id], :image_url => params[:imgurl])
+Comment.create(:scene_id => @scene.id, :comment => params[:comment]) unless params[:comment].blank?
+@request = Request.find params[:request_id]
+respond_to do |format|
+      format.js { 
+        render 'requests/update_scenes' and return
+       }
+    end
   end
+else
+  redirect_to root_path, notice: "Bad request." and return
+end
+
+
+def add_request_comment
+  if current_coach
+  Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :coach_id => current_coach.id)
+elsif current_user
+   Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :user_id => current_user.id)
+end
+
+  redirect_to request.referer
+end
 
 def scenes
+  authenticate_coach!
   @scenes = @request.scenes
 end
 

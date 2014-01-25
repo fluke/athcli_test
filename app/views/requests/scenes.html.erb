@@ -2,10 +2,22 @@
 
 <% @scenes.each_with_index do |scene, i| %>
 
-Scene number #<%=i%>
+<h3>Scene number #<%=i%></h3>
+<br/>
+<h3>Comments</h3>
+<% scene.comments.each do |c| %>
+<%= c.comment %><br/>
+<%end%>
+<br/>
 <%= image_tag(scene.image_url) %>
-    <%= simple_form_for :comments, { url: add_request_comment_path,:method => 'post', wrapper: :home } do |f| %>
-      <%= f.input :data, as: :text, placeholder: "Leave comment" %>
+    <%= simple_form_for :comments, { url: add_request_comment_path, :method => 'post' } do |f| %>
+      <%= f.input :comment, as: :text, placeholder: "Leave comment" %>
+      <%if current_coach %>
+      <%= f.input :coach_id, :as => :hidden, :input_html => { :value => "#{@request.coach_id}" } %>
+      <%elsif current_user %>
+      <%= f.input :user_id, :as => :hidden, :input_html => { :value => "#{@request.user_id}" } %>
+      <%end%>
+      <%= f.input :scene_id, as: :hidden, :input_html => { :value => "#{scene.id}" } %>
       <%= f.button :submit, "Submit", class: "btn btn-success" %>
     <% end %>
 <%end%>
