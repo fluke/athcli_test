@@ -1,0 +1,9 @@
+<hr/>
+<h2>Scenes <%= link_to "All Scenes for this request", request_scenes_path(@request), class: "btn btn-warning" %></h2>
+<% @request.scenes.each_with_index do |scene, i| %>
+
+Scene number #<%=i%>
+<%= image_tag(scene.image_url) %>
+<%end%>
+
+<br/><br/>

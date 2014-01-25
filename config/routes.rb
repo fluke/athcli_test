@@ -1,5 +1,6 @@
 Athcli2::Application.routes.draw do
-
+  post 'requests/:id/add_request_comment' => 'requests#add_request_comment', as: :add_request_comment
+  get 'requests/request_reload' => 'requests#request_reload', as: :request_reload
   get "home/index"
   get "home/coach_index"
   get "home/user_index"

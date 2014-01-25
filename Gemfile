@@ -35,7 +35,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-#gem 'simple_form'
+gem 'simple_form'
 
 group :production do
   # bundle exec rake doc:rails generates the API under doc/api.
