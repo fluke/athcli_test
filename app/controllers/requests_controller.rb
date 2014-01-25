@@ -10,20 +10,25 @@ class RequestsController < ApplicationController
   # GET /requests/1
   # GET /requests/1.json
   def show
+    if current_coach
+      @scenes = @request.scenes
+    elsif current_user
+      redirect_to request_scenes_path
+    end
   end
 
 
   def request_reload
     authenticate_coach!
     #check if user can access
-if Request.find(params[:request_id]) &&  Request.find(params[:request_id]).coach == current_coach
-@scene = Scene.create(:request_id => params[:request_id], :image_url => params[:imgurl])
-Comment.create(:scene_id => @scene.id, :comment => params[:comment]) unless params[:comment].blank?
-@request = Request.find params[:request_id]
-respond_to do |format|
+    if Request.find(params[:request_id]) &&  Request.find(params[:request_id]).coach == current_coach
+    @scene = Scene.create(:request_id => params[:request_id], :image_url => params[:imgurl])
+    Comment.create(:scene_id => @scene.id, :comment => params[:comment]) unless params[:comment].blank?
+    @request = Request.find params[:request_id]
+    respond_to do |format|
       format.js { 
         render 'requests/update_scenes' and return
-       }
+      }
     end
   end
 else
@@ -33,16 +38,15 @@ end
 
 def add_request_comment
   if current_coach
-  Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :coach_id => current_coach.id)
-elsif current_user
-   Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :user_id => current_user.id)
-end
+    Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :coach_id => current_coach.id)
+  elsif current_user
+    Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :user_id => current_user.id)
+  end
 
   redirect_to request.referer
 end
 
 def scenes
-  authenticate_coach!
   @scenes = @request.scenes
 end
 

@@ -30,10 +30,11 @@
     	<canvas id="b"></canvas>
     	<canvas id="c"></canvas>
     </div>
+    <br>
     <div class="form-group">
-    <label for="comment">Comment</label>
-    <input type="text" class="form-control" id="comment_box" placeholder="Enter comment">
-  </div>
+      <label for="comment">Comment</label>
+      <input type="text" class="form-control comment-input" id="comment_box" placeholder="Enter comment">
+    </div>
     <form id="<%= IMGUR_CLIENT_ID %>" class="imgur-submit">
         <input type="submit" class="btn btn-submit" id="imgur" value="Save Scene">
         <input class="scene_url" type="hidden">
@@ -53,5 +54,7 @@
 <%end%>
 
 <div id = "scenes_list">
+<hr/>
+<h2>Scenes <%= link_to "All Scenes for this request", request_scenes_path(@request), class: "btn btn-warning" %></h2>
 <%= render 'scenes_partial' %>
 </div>

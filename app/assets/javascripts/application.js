@@ -39,6 +39,7 @@ ATHCLI = {
       var lcanvas = document.getElementById('b');
       // Drawing canvas object
       b = $('#b');
+      i = $('.comment-input');
       var lcontext = canvas.getContext('2d');
       var back = document.createElement('canvas');
       var backcontext = back.getContext('2d');
@@ -57,6 +58,7 @@ ATHCLI = {
          back.width = cw;
          back.height = ch;
          l.css({ width: cw, height: ch+61 });
+         i.css({ width: cw });
       }, false);
 
       $('#snap').click(function() {
@@ -75,6 +77,7 @@ ATHCLI = {
         back.width = cw;
         back.height = ch;
         l.css({ width: cw, height: ch+61 });
+        i.css({ width: cw });
         // First, draw it into the backing canvas
         // bc.drawImage(v,0,0,cw,ch);
         c.fillRect(0,0,cw,ch);

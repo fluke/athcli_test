@@ -1,25 +1,34 @@
-<h1>Scenes for <%= @request.title %> </h1>
+<h1>Scenes for <%= @request.title %> <span class="badge"><%= @scenes.count %></span></h1>
 
 <% @scenes.each_with_index do |scene, i| %>
+  
+  <div class="row">
+    <div class="col-sm-4 scene-image">
+      <a href="#" class="thumbnail">
+        <%= image_tag(scene.image_url) %>
+      </a>
+    </div>
+  
+    <div class="col-sm-8 scene-info">
+      <h3>Scene number #<%=i%></h3>
+      <h3>Comments</h3>
+      <% scene.comments.each do |c| %>
+      <%= c.comment %><br/>
+      <% end %>
 
-<h3>Scene number #<%=i%></h3>
-<br/>
-<h3>Comments</h3>
-<% scene.comments.each do |c| %>
-<%= c.comment %><br/>
+      <br/>
+
+      <%= simple_form_for :comments, { url: add_request_comment_path, :method => 'post' } do |f| %>
+        <%= f.input :comment, as: :text, placeholder: "Leave comment", :input_html => { :class => "form-control" } %>
+        <%if current_coach %>
+          <%= f.input :coach_id, :as => :hidden, :input_html => { :value => "#{@request.coach_id}" } %>
+        <%elsif current_user %>
+          <%= f.input :user_id, :as => :hidden, :input_html => { :value => "#{@request.user_id}" } %>
+        <%end%>
+        <%= f.input :scene_id, as: :hidden, :input_html => { :value => "#{scene.id}" } %>
+        <%= f.button :submit, "Submit", class: "btn btn-success submit" %>
+      <% end %>
+    </div>
+  </div>
+
 <%end%>
-<br/>
-<%= image_tag(scene.image_url) %>
-    <%= simple_form_for :comments, { url: add_request_comment_path, :method => 'post' } do |f| %>
-      <%= f.input :comment, as: :text, placeholder: "Leave comment" %>
-      <%if current_coach %>
-      <%= f.input :coach_id, :as => :hidden, :input_html => { :value => "#{@request.coach_id}" } %>
-      <%elsif current_user %>
-      <%= f.input :user_id, :as => :hidden, :input_html => { :value => "#{@request.user_id}" } %>
-      <%end%>
-      <%= f.input :scene_id, as: :hidden, :input_html => { :value => "#{scene.id}" } %>
-      <%= f.button :submit, "Submit", class: "btn btn-success" %>
-    <% end %>
-<%end%>
-
-
