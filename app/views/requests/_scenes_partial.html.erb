@@ -16,20 +16,8 @@
       <% scene.comments.each do |c| %>
       <%= c.comment %><br/>
       <% end %>
-
-      <br/>
-
-      <%= simple_form_for :comments, { url: add_request_comment_path, :method => 'post' } do |f| %>
-        <%= f.input :comment, as: :text, placeholder: "Leave comment", :input_html => { :class => "form-control" } %>
-        <%if current_coach %>
-          <%= f.input :coach_id, :as => :hidden, :input_html => { :value => "#{@request.coach_id}" } %>
-        <%elsif current_user %>
-          <%= f.input :user_id, :as => :hidden, :input_html => { :value => "#{@request.user_id}" } %>
-        <%end%>
-        <%= f.input :scene_id, as: :hidden, :input_html => { :value => "#{scene.id}" } %>
-        <%= f.button :submit, "Submit", class: "btn btn-success submit" %>
-      <% end %>
     </div>
+    
   </div>
 
 <%end%>
