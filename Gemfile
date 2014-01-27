@@ -36,6 +36,7 @@ group :doc do
 end
 
 gem 'simple_form'
+gem 'streamio-ffmpeg'
 
 group :production do
   # bundle exec rake doc:rails generates the API under doc/api.

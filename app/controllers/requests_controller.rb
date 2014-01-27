@@ -22,33 +22,34 @@ class RequestsController < ApplicationController
     authenticate_coach!
     #check if user can access
     if Request.find(params[:request_id]) &&  Request.find(params[:request_id]).coach == current_coach
-    @scene = Scene.create(:request_id => params[:request_id], :image_url => params[:imgurl])
-    Comment.create(:scene_id => @scene.id, :comment => params[:comment]) unless params[:comment].blank?
-    @request = Request.find params[:request_id]
-    respond_to do |format|
-      format.js { 
-        render 'requests/update_scenes' and return
-      }
+      @scene = Scene.create(:request_id => params[:request_id], :image_url => params[:imgurl], :timestamp => params[:timestamp])
+      Comment.create(:scene_id => @scene.id, :comment => params[:comment]) unless params[:comment].blank?
+      @request = Request.find params[:request_id]
+      @scenes = @request.scenes
+      respond_to do |format|
+        format.js { 
+          render 'requests/update_scenes' and return
+        }
+      end
+    else
+      redirect_to root_path, notice: "Bad request." and return
+    end  
+  end
+
+
+  def add_request_comment
+    if current_coach
+      Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :coach_id => current_coach.id)
+    elsif current_user
+      Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :user_id => current_user.id)
     end
-  end
-else
-  redirect_to root_path, notice: "Bad request." and return
-end
 
-
-def add_request_comment
-  if current_coach
-    Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :coach_id => current_coach.id)
-  elsif current_user
-    Comment.create(:scene_id => params[:comments][:scene_id], :comment => params[:comments][:comment], :user_id => current_user.id)
+    redirect_to request.referer
   end
 
-  redirect_to request.referer
-end
-
-def scenes
-  @scenes = @request.scenes
-end
+  def scenes
+    @scenes = @request.scenes
+  end
 
   # GET /requests/new
   def new
@@ -99,23 +100,31 @@ end
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_request
-      @request = Request.find(params[:id])
-    end
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_request
+    @request = Request.find(params[:id])
+  end
 
-   def permission_ok
+  # Could be used to create thumbnails from uploaded videos.
+  require 'streamio-ffmpeg'
+  def thumbnail path, second
+    movie = FFMPEG::Movie.new(path)
+    return movie.screenshot("tmp/#{File.basename(path)}.jpg", :seek_time => second)
+  end
+
+
+  def permission_ok
     if current_coach && @request.coach_id == current_coach.id
     elsif current_user && @request.user_id == current_user.id
     else
       redirect_to root_path, notice: "Bad request."
     end
-   end
+  end
 
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def request_params
-      params.require(:request).permit(:title, :movie_url, :user_id, :coach_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def request_params
+    params.require(:request).permit(:title, :movie_url, :user_id, :coach_id)
+  end
 end

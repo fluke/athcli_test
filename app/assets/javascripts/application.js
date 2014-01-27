@@ -121,19 +121,19 @@ ATHCLI = {
                   // On successful upload - scene_url is set
                   $('.scene_url').val('https://imgur.com/gallery/' + result.data.id);
                   
-          $.ajax({
-              type: "GET",
-              dataType: "script",
-              contentType: "application/json; charset=utf-8",
-              url: '/requests/request_reload.js',
-              data: { imgurl: 'https://imgur.com/' + result.data.id + '.png', request_id: $("#request_id").val(), comment: $("#comment_box").val()},
-              success: function(result) {
-$("#comment_box").val('');
-          }
-        });
+                  $.ajax({
+                    type: "GET",
+                    dataType: "script",
+                    contentType: "application/json; charset=utf-8",
+                    url: '/requests/request_reload.js',
+                    data: { imgurl: 'https://imgur.com/' + result.data.id + '.png', request_id: $("#request_id").val(), comment: $("#comment_box").val(), timestamp: v.currentTime },
+                    success: function(result) {
+                      $("#comment_box").val('');
+                    }
+                  });
 
 
-          //return false;
+                  //return false;
 
                   // Image is cleared
                   $('.clear-button').click();
