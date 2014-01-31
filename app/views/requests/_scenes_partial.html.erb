@@ -11,10 +11,10 @@
     </div>
   
     <div class="col-sm-8 scene-info">
-      <h3>Scene number #<%=i%><span class="badge">Time: <%= scene.timestamp.to_f.round(2) %></span></h3>
+      <h3>Scene number #<%=i%><span class="badge"> Time: <%= scene.timestamp.to_f.round(2) %></span></h3>
       <h3>Comments</h3>
       <% scene.comments.each do |c| %>
-      <%= c.comment %><br/>
+      <div class="triangle-isosceles <%= 'top'.html_safe if c.user_id %>"><%= c.comment %></div>
       <% end %>
     </div>
     

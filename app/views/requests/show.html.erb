@@ -34,6 +34,8 @@
     <div class="form-group">
       <label for="comment">Comment</label>
       <input type="text" class="form-control comment-input" id="comment_box" placeholder="Enter comment">
+      <input type="hidden" id="coach" placeholder="Enter comment" value="<%= @request.coach_id %>">
+      <input type="hidden" id="user" placeholder="Enter comment" value="<%= @request.coach_id %>">
     </div>
     <form id="<%= IMGUR_CLIENT_ID %>" class="imgur-submit">
         <input type="submit" class="btn btn-submit" id="imgur" value="Save Scene">

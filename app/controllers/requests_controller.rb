@@ -23,7 +23,7 @@ class RequestsController < ApplicationController
     #check if user can access
     if Request.find(params[:request_id]) &&  Request.find(params[:request_id]).coach == current_coach
       @scene = Scene.create(:request_id => params[:request_id], :image_url => params[:imgurl], :timestamp => params[:timestamp])
-      Comment.create(:scene_id => @scene.id, :comment => params[:comment]) unless params[:comment].blank?
+      Comment.create(:scene_id => @scene.id, :comment => params[:comment], :coach_id => params[:coach], :user_id => params[:user]) unless params[:comment].blank?
       @request = Request.find params[:request_id]
       @scenes = @request.scenes
       respond_to do |format|

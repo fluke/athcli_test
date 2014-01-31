@@ -126,7 +126,7 @@ ATHCLI = {
                     dataType: "script",
                     contentType: "application/json; charset=utf-8",
                     url: '/requests/request_reload.js',
-                    data: { imgurl: 'https://imgur.com/' + result.data.id + '.png', request_id: $("#request_id").val(), comment: $("#comment_box").val(), timestamp: v.currentTime },
+                    data: { imgurl: 'https://imgur.com/' + result.data.id + '.png', request_id: $("#request_id").val(), comment: $("#comment_box").val(), coach: $('#coach').val(), user: $('#user').val(), timestamp: v.currentTime },
                     success: function(result) {
                       $("#comment_box").val('');
                     }
