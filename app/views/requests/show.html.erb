@@ -15,14 +15,7 @@
 
 <div class="row">
   <div class="col-md-6">
-    <video width="480" crossorigin="anonymous" id="v" controls="" loop="">  
-    	<source src="<%= @request.movie_url %>" type="video/mp4"> 
-      Format not supported
-    </video> 
-    <div class="textbox">
-      
-
-    </div>
+    <%= render 'layouts/video' %>
     <button id="snap" class="btn btn-success">Take screenshot</button>
   </div>
   <div class="col-md-6">

@@ -1,6 +1,10 @@
 
 <h1>Scenes for <%= @request.title %> <span class="badge"><%= @scenes.count %></span></h1>
 
+<div class="col-md-6">
+    <%= render 'layouts/video' %>
+</div>
+
 <% @scenes.each_with_index do |scene, i| %>
   
   <div class="row">

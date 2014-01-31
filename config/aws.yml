@@ -1,0 +1,14 @@
+development:
+  access_key_id: 'AKIAJESFR4VBZDPKD3MA'
+  secret_access_key: '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'
+  bucket: 'vaton2'  
+
+test:
+  access_key_id: 'AKIAJESFR4VBZDPKD3MA'
+  secret_access_key: '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'
+  bucket: 'vaton2'  
+
+production:
+  access_key_id: 'AKIAJESFR4VBZDPKD3MA'
+  secret_access_key: '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'
+  bucket: 'vaton2' 

@@ -38,6 +38,10 @@ end
 gem 'simple_form'
 gem 'streamio-ffmpeg'
 
+gem "paperclip"
+gem 'aws-sdk'
+gem 's3_direct_upload'
+
 group :production do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'rails_12factor'
