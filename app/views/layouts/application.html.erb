@@ -15,7 +15,7 @@
           <%= link_to "Vaton", home_user_index_path, class: "navbar-brand" %>
           <% end %>
           <% if coach_signed_in? %>
-          <%= link_to "Vaton", home_user_index_path, class: "navbar-brand" %>
+          <%= link_to "Vaton", home_coach_index_path, class: "navbar-brand" %>
           <% end %>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
@@ -24,16 +24,15 @@
           </button>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
-
           <ul class="nav navbar-nav navbar-right">
             <li><% if user_signed_in? %>
-<%= link_to "Logged in as #{current_user.email}. Logout", destroy_user_session_path, method: :delete %>
-<% end%>
-</li>
+            <%= link_to "Logged in as #{current_user.email}. Logout", destroy_user_session_path, method: :delete %>
+            <% end%>
+            </li>
             <li>
             	<% if coach_signed_in? %>
-<%= link_to "Logged in as #{current_coach.email}. Logout", destroy_coach_session_path, method: :delete %>
-<% end%>
+              <%= link_to "Logged in as #{current_coach.email}. Logout", destroy_coach_session_path, method: :delete %>
+              <% end%>
             </li>
           </ul>
 
