@@ -67,10 +67,7 @@ ATHCLI = {
       
       var cw,ch;
 
-      v.addEventListener('loadeddata', function() {
-         // Video is loaded and can be played
-         cw = v.clientWidth;
-         ch = v.clientHeight;
+      function setDimensions(cw,ch) {
          canvas.height = ch;
          canvas.width = cw;
          lcanvas.height = ch;
@@ -80,7 +77,24 @@ ATHCLI = {
          back.height = ch;
          l.css({ width: cw, height: ch+61 });
          i.css({ width: cw });
-      }, false);
+      }
+
+      function getSetDimensions() {
+        cw = v.clientWidth;
+        ch = v.clientHeight;
+        setDimensions(cw,ch);
+      }
+
+      $(v).on('loadedmetadata', function() {
+         // Video is loaded and can be played
+         getSetDimensions();
+      });
+
+      $(window).on('resize', function() {
+         // Page is resized
+         // Phone is turned
+         getSetDimensions();
+      });
 
       $('#snap').click(function() {
         cw = v.clientWidth;
@@ -90,15 +104,7 @@ ATHCLI = {
 
       function snapclick(v,c,bc,cw,ch) {
         if(v.ended) return false;
-        canvas.height = ch;
-        canvas.width = cw;
-        lcanvas.height = ch;
-        lcanvas.width = cw;
-        b.css({ width: cw, height: ch });
-        back.width = cw;
-        back.height = ch;
-        l.css({ width: cw, height: ch+61 });
-        i.css({ width: cw });
+        setDimensions(cw,ch);
         // First, draw it into the backing canvas
         // bc.drawImage(v,0,0,cw,ch);
         c.fillRect(0,0,cw,ch);

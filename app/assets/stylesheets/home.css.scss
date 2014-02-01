@@ -2,8 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// Show action
+
 .literally {
-	height: 421px;
+	height: 400px;
 	width: 480px;
 	cursor: crosshair;
 }
@@ -13,7 +15,7 @@
 	display: block;
 }
 
-.submit {
+.submit, #snap {
 	margin-top: 7px;
 }
 
@@ -26,6 +28,9 @@
 .scene-image {
 	margin-top: 20px;
 }
+
+
+// Comment bubbles
 
 .triangle-isosceles.top {
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#f3961c), to(#f9d835));
