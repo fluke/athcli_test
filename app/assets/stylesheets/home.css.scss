@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+body {
+   word-wrap: break-word;
+}
+
 // Show action
 
 .literally {
@@ -10,8 +15,14 @@
 	cursor: crosshair;
 }
 
+.coach-container {
+	.col-md-6 {
+		margin-bottom: 25px;
+	}
+}
+
 .imgur-submit {
-	margin-top: 7px;
+	margin-top: 10px;
 	display: block;
 }
 
